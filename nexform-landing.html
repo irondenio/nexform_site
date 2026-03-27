@@ -1,0 +1,848 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NexForm Conseil – Transformez vos opérations, gagnez en efficacité | Cabinet de conseil PME</title>
+  <meta name="description" content="NexForm Conseil accompagne les dirigeants de PME dans leur transformation digitale. Gagnez du temps, réduisez les coûts et prenez de meilleures décisions grâce à nos solutions sur mesure." />
+  <meta name="robots" content="index, follow" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <style>
+    /* ── TOKENS ──────────────────────────────────────────── */
+    :root {
+      --ink:        #0d1117;
+      --ink-soft:   #3d4451;
+      --paper:      #f7f5f0;
+      --cream:      #ede9e0;
+      --gold:       #c8a96e;
+      --gold-dark:  #a8883e;
+      --accent:     #1a3a5c;
+      --accent-lt:  #2d5a8e;
+      --white:      #ffffff;
+      --success:    #2d7a4f;
+
+      --serif: 'Playfair Display', Georgia, serif;
+      --sans:  'DM Sans', sans-serif;
+
+      --r-sm: .5rem;
+      --r-md: 1rem;
+      --r-lg: 1.5rem;
+      --shadow-card: 0 2px 24px rgba(13,17,23,.08), 0 1px 4px rgba(13,17,23,.04);
+      --shadow-btn:  0 4px 16px rgba(200,169,110,.35);
+    }
+
+    /* ── RESET ───────────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; font-size: 16px; }
+    body {
+      font-family: var(--sans);
+      background: var(--paper);
+      color: var(--ink);
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    input, textarea, button { font-family: inherit; }
+
+    /* ── UTILITY ─────────────────────────────────────────── */
+    .container { width: 100%; max-width: 1120px; margin: 0 auto; padding: 0 1.5rem; }
+    .sr-only { position: absolute; width: 1px; height: 1px; overflow: hidden; clip: rect(0,0,0,0); }
+    .reveal { opacity: 0; transform: translateY(28px); transition: opacity .7s ease, transform .7s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-delay-1 { transition-delay: .12s; }
+    .reveal-delay-2 { transition-delay: .24s; }
+    .reveal-delay-3 { transition-delay: .36s; }
+
+    /* ── NAV ─────────────────────────────────────────────── */
+    .nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: .9rem 2rem;
+      background: rgba(247,245,240,.92);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(200,169,110,.18);
+      transition: box-shadow .3s;
+    }
+    .nav.scrolled { box-shadow: 0 2px 20px rgba(13,17,23,.1); }
+    .nav-logo {
+      font-family: var(--serif);
+      font-size: 1.3rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: -.01em;
+    }
+    .nav-logo span { color: var(--gold); }
+    .nav-cta {
+      display: inline-flex; align-items: center; gap: .45rem;
+      background: var(--accent);
+      color: var(--white);
+      padding: .55rem 1.2rem;
+      border-radius: var(--r-sm);
+      font-size: .875rem;
+      font-weight: 600;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--accent-lt); transform: translateY(-1px); }
+
+    /* ── HERO ────────────────────────────────────────────── */
+    .hero {
+      min-height: 100svh;
+      display: grid;
+      place-items: center;
+      padding: 7rem 1.5rem 5rem;
+      background:
+        radial-gradient(ellipse 80% 60% at 70% 40%, rgba(200,169,110,.12) 0%, transparent 65%),
+        radial-gradient(ellipse 50% 40% at 10% 80%, rgba(26,58,92,.07) 0%, transparent 60%),
+        var(--paper);
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%23c8a96e' fill-opacity='0.04'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+      opacity: .6;
+    }
+    .hero-inner {
+      position: relative;
+      text-align: center;
+      max-width: 860px;
+    }
+    .hero-badge {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: rgba(200,169,110,.15);
+      border: 1px solid rgba(200,169,110,.35);
+      color: var(--gold-dark);
+      font-size: .8rem;
+      font-weight: 600;
+      letter-spacing: .07em;
+      text-transform: uppercase;
+      padding: .35rem .9rem;
+      border-radius: 100px;
+      margin-bottom: 1.8rem;
+      animation: fadeDown .6s ease both;
+    }
+    .hero-badge::before {
+      content: '✦';
+      font-size: .65rem;
+    }
+    .hero h1 {
+      font-family: var(--serif);
+      font-size: clamp(2.4rem, 5.5vw, 4rem);
+      font-weight: 700;
+      line-height: 1.18;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      margin-bottom: 1.4rem;
+      animation: fadeDown .7s .1s ease both;
+    }
+    .hero h1 em {
+      font-style: normal;
+      color: var(--gold-dark);
+      position: relative;
+    }
+    .hero h1 em::after {
+      content: '';
+      position: absolute;
+      left: 0; right: 0;
+      bottom: .05em;
+      height: .06em;
+      background: currentColor;
+      opacity: .3;
+      border-radius: 4px;
+    }
+    .hero-sub {
+      font-size: clamp(1rem, 2vw, 1.2rem);
+      color: var(--ink-soft);
+      max-width: 620px;
+      margin: 0 auto 2.4rem;
+      font-weight: 400;
+      line-height: 1.7;
+      animation: fadeDown .7s .2s ease both;
+    }
+    .hero-actions {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;
+      animation: fadeDown .7s .3s ease both;
+    }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--gold);
+      color: var(--ink);
+      padding: .85rem 2rem;
+      border-radius: var(--r-sm);
+      font-size: 1rem;
+      font-weight: 600;
+      box-shadow: var(--shadow-btn);
+      transition: background .2s, transform .15s, box-shadow .2s;
+      border: none; cursor: pointer;
+    }
+    .btn-primary:hover { background: var(--gold-dark); color: var(--white); transform: translateY(-2px); box-shadow: 0 8px 24px rgba(200,169,110,.4); }
+    .btn-ghost {
+      display: inline-flex; align-items: center; gap: .5rem;
+      border: 1.5px solid rgba(13,17,23,.2);
+      color: var(--ink-soft);
+      padding: .85rem 1.8rem;
+      border-radius: var(--r-sm);
+      font-size: 1rem;
+      font-weight: 500;
+      transition: border-color .2s, color .2s, transform .15s;
+    }
+    .btn-ghost:hover { border-color: var(--accent); color: var(--accent); transform: translateY(-2px); }
+    .hero-trust {
+      margin-top: 3.5rem;
+      display: flex; align-items: center; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+      font-size: .8rem;
+      color: var(--ink-soft);
+      animation: fadeDown .7s .45s ease both;
+    }
+    .hero-trust-item { display: flex; align-items: center; gap: .4rem; }
+    .hero-trust-item svg { color: var(--gold); }
+    .hero-divider { width: 1px; height: 1rem; background: rgba(13,17,23,.2); }
+
+    /* ── BENEFITS ────────────────────────────────────────── */
+    .benefits {
+      padding: 6rem 1.5rem;
+      background: var(--white);
+    }
+    .section-label {
+      display: block;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--gold-dark);
+      margin-bottom: .75rem;
+    }
+    .section-title {
+      font-family: var(--serif);
+      font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+      font-weight: 700;
+      line-height: 1.22;
+      color: var(--ink);
+      letter-spacing: -.02em;
+      margin-bottom: 1rem;
+    }
+    .section-sub {
+      font-size: 1.05rem;
+      color: var(--ink-soft);
+      max-width: 540px;
+      line-height: 1.7;
+    }
+    .benefits-header { margin-bottom: 3.5rem; }
+    .benefits-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .benefit-card {
+      background: var(--paper);
+      border: 1px solid var(--cream);
+      border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      transition: transform .25s, box-shadow .25s, border-color .25s;
+      position: relative;
+      overflow: hidden;
+    }
+    .benefit-card::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--gold), var(--accent));
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform .3s ease;
+    }
+    .benefit-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-card); border-color: rgba(200,169,110,.4); }
+    .benefit-card:hover::before { transform: scaleX(1); }
+    .benefit-icon {
+      width: 52px; height: 52px;
+      border-radius: var(--r-md);
+      background: linear-gradient(135deg, rgba(200,169,110,.15), rgba(200,169,110,.05));
+      border: 1px solid rgba(200,169,110,.25);
+      display: grid; place-items: center;
+      margin-bottom: 1.25rem;
+      font-size: 1.5rem;
+    }
+    .benefit-stat {
+      font-family: var(--serif);
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--accent);
+      line-height: 1;
+      margin-bottom: .3rem;
+    }
+    .benefit-title {
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: .6rem;
+    }
+    .benefit-desc {
+      font-size: .9rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+    }
+
+    /* ── SOCIAL PROOF ────────────────────────────────────── */
+    .testimonials {
+      padding: 6rem 1.5rem;
+      background: var(--accent);
+      color: var(--white);
+      position: relative;
+      overflow: hidden;
+    }
+    .testimonials::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg width='80' height='80' viewBox='0 0 80 80' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='%23ffffff' fill-opacity='0.03' fill-rule='evenodd'%3E%3Cpath d='M0 0h40v40H0V0zm40 40h40v40H40V40z'/%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .testimonials .section-label { color: rgba(200,169,110,.8); }
+    .testimonials .section-title { color: var(--white); }
+    .testimonials .section-sub { color: rgba(255,255,255,.65); }
+    .testimonials-header { margin-bottom: 3.5rem; }
+    .testimonials-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 1.5rem;
+    }
+    .testi-card {
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: var(--r-lg);
+      padding: 2rem 1.75rem;
+      position: relative;
+      transition: background .25s, transform .25s;
+    }
+    .testi-card:hover { background: rgba(255,255,255,.1); transform: translateY(-3px); }
+    .testi-quote {
+      font-family: var(--serif);
+      font-size: 3rem;
+      color: var(--gold);
+      line-height: 1;
+      margin-bottom: .75rem;
+    }
+    .testi-text {
+      font-size: .975rem;
+      line-height: 1.75;
+      color: rgba(255,255,255,.85);
+      margin-bottom: 1.5rem;
+      font-style: italic;
+    }
+    .testi-author {
+      display: flex; align-items: center; gap: .9rem;
+    }
+    .testi-avatar {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--gold), var(--accent-lt));
+      display: grid; place-items: center;
+      font-family: var(--serif);
+      font-weight: 700;
+      font-size: 1rem;
+      color: var(--white);
+      flex-shrink: 0;
+    }
+    .testi-name { font-weight: 600; font-size: .95rem; color: var(--white); }
+    .testi-role { font-size: .8rem; color: rgba(255,255,255,.55); margin-top: .1rem; }
+    .testi-stars { color: var(--gold); font-size: .85rem; letter-spacing: .1em; margin-bottom: .75rem; }
+
+    /* ── FORM SECTION ────────────────────────────────────── */
+    .form-section {
+      padding: 6rem 1.5rem;
+      background: var(--paper);
+      position: relative;
+    }
+    .form-section::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--cream), var(--gold), var(--cream), transparent);
+    }
+    .form-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 4rem;
+      align-items: start;
+    }
+    @media (max-width: 768px) {
+      .form-layout { grid-template-columns: 1fr; gap: 2.5rem; }
+    }
+    .form-intro { position: sticky; top: 6rem; }
+    .form-intro .section-title { margin-bottom: 1rem; }
+    .form-intro .section-sub { margin-bottom: 2rem; }
+    .form-checklist { list-style: none; display: flex; flex-direction: column; gap: .7rem; }
+    .form-checklist li {
+      display: flex; align-items: flex-start; gap: .6rem;
+      font-size: .9rem;
+      color: var(--ink-soft);
+    }
+    .form-checklist li::before {
+      content: '✓';
+      color: var(--success);
+      font-weight: 700;
+      font-size: .85rem;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .form-card {
+      background: var(--white);
+      border: 1px solid var(--cream);
+      border-radius: var(--r-lg);
+      padding: 2.25rem 2rem;
+      box-shadow: var(--shadow-card);
+    }
+    .form-card h3 {
+      font-family: var(--serif);
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: var(--ink);
+      margin-bottom: .4rem;
+    }
+    .form-card p {
+      font-size: .875rem;
+      color: var(--ink-soft);
+      margin-bottom: 1.75rem;
+    }
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+    @media (max-width: 480px) {
+      .form-row { grid-template-columns: 1fr; }
+    }
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-bottom: 1rem;
+    }
+    .field label {
+      font-size: .8rem;
+      font-weight: 600;
+      color: var(--ink);
+      letter-spacing: .02em;
+    }
+    .field label span { color: var(--gold-dark); margin-left: .15rem; }
+    .field input, .field textarea {
+      width: 100%;
+      padding: .7rem 1rem;
+      border: 1.5px solid var(--cream);
+      border-radius: var(--r-sm);
+      background: var(--paper);
+      font-size: .95rem;
+      color: var(--ink);
+      transition: border-color .2s, box-shadow .2s, background .2s;
+      outline: none;
+    }
+    .field input:focus, .field textarea:focus {
+      border-color: var(--gold);
+      background: var(--white);
+      box-shadow: 0 0 0 3px rgba(200,169,110,.12);
+    }
+    .field input::placeholder, .field textarea::placeholder { color: rgba(61,68,81,.4); }
+    .field textarea { resize: vertical; min-height: 110px; }
+    .form-privacy {
+      font-size: .75rem;
+      color: var(--ink-soft);
+      text-align: center;
+      margin-top: .75rem;
+      line-height: 1.5;
+    }
+    .form-privacy a { color: var(--gold-dark); text-decoration: underline; text-underline-offset: 2px; }
+    .btn-submit {
+      width: 100%;
+      display: flex; align-items: center; justify-content: center; gap: .5rem;
+      background: var(--gold);
+      color: var(--ink);
+      padding: .95rem 2rem;
+      border-radius: var(--r-sm);
+      font-size: 1rem;
+      font-weight: 700;
+      box-shadow: var(--shadow-btn);
+      border: none; cursor: pointer;
+      transition: background .2s, transform .15s, box-shadow .2s;
+      margin-top: .25rem;
+    }
+    .btn-submit:hover { background: var(--gold-dark); color: var(--white); transform: translateY(-1px); }
+    .btn-submit:active { transform: none; }
+    .btn-submit svg { transition: transform .2s; }
+    .btn-submit:hover svg { transform: translateX(4px); }
+
+    /* ── SUCCESS STATE ───────────────────────────────────── */
+    #success-msg {
+      display: none;
+      text-align: center;
+      padding: 2rem 1rem;
+    }
+    #success-msg.visible { display: block; animation: fadeDown .5s ease both; }
+    .success-icon {
+      width: 64px; height: 64px;
+      background: rgba(45,122,79,.1);
+      border-radius: 50%;
+      display: grid; place-items: center;
+      margin: 0 auto 1.25rem;
+      font-size: 1.8rem;
+    }
+    #success-msg h4 {
+      font-family: var(--serif);
+      font-size: 1.4rem;
+      color: var(--ink);
+      margin-bottom: .6rem;
+    }
+    #success-msg p { font-size: .9rem; color: var(--ink-soft); line-height: 1.7; }
+
+    /* ── FOOTER ──────────────────────────────────────────── */
+    .footer {
+      background: var(--ink);
+      color: rgba(255,255,255,.6);
+      padding: 3rem 1.5rem 2rem;
+    }
+    .footer-inner {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 2rem;
+      align-items: center;
+      padding-bottom: 2rem;
+      border-bottom: 1px solid rgba(255,255,255,.08);
+      margin-bottom: 1.5rem;
+    }
+    @media (max-width: 600px) {
+      .footer-inner { grid-template-columns: 1fr; }
+    }
+    .footer-logo {
+      font-family: var(--serif);
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: var(--white);
+      margin-bottom: .5rem;
+    }
+    .footer-logo span { color: var(--gold); }
+    .footer-tagline { font-size: .8rem; }
+    .footer-social { display: flex; gap: .8rem; }
+    .social-btn {
+      width: 38px; height: 38px;
+      border-radius: var(--r-sm);
+      border: 1px solid rgba(255,255,255,.12);
+      display: grid; place-items: center;
+      color: rgba(255,255,255,.6);
+      transition: border-color .2s, color .2s, background .2s;
+      font-size: .9rem;
+    }
+    .social-btn:hover { border-color: var(--gold); color: var(--gold); background: rgba(200,169,110,.08); }
+    .footer-bottom {
+      display: flex; flex-wrap: wrap; gap: 1rem; justify-content: space-between; align-items: center;
+      font-size: .78rem;
+    }
+    .footer-links { display: flex; gap: 1.5rem; flex-wrap: wrap; }
+    .footer-links a { transition: color .2s; }
+    .footer-links a:hover { color: var(--gold); }
+
+    /* ── ANIMATIONS ──────────────────────────────────────── */
+    @keyframes fadeDown {
+      from { opacity: 0; transform: translateY(-14px); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── MOBILE ──────────────────────────────────────────── */
+    @media (max-width: 768px) {
+      .nav { padding: .75rem 1rem; }
+      .nav-logo { font-size: 1.1rem; }
+      .hero { padding: 6rem 1rem 4rem; }
+      .hero-actions { flex-direction: column; align-items: center; }
+      .btn-primary, .btn-ghost { width: 100%; justify-content: center; }
+      .hero-trust-item:not(:first-child) .hero-divider { display: none; }
+      .benefits, .testimonials, .form-section { padding: 4rem 1rem; }
+      .form-intro { position: static; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ── NAV ───────────────────────────────────────────── -->
+  <header class="nav" id="nav" role="banner">
+    <div class="nav-logo">Nex<span>Form</span> Conseil</div>
+    <a href="#formulaire" class="nav-cta">
+      <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      Diagnostic gratuit
+    </a>
+  </header>
+
+  <!-- ── HERO ──────────────────────────────────────────── -->
+  <section class="hero" aria-labelledby="hero-title">
+    <div class="hero-inner">
+      <div class="hero-badge">Cabinet de conseil · Transformation digitale PME</div>
+      <h1 id="hero-title">
+        Libérez votre équipe des tâches répétitives<br>
+        et <em>doublez votre productivité</em> en 90 jours
+      </h1>
+      <p class="hero-sub">
+        NexForm Conseil accompagne les dirigeants de PME dans la digitalisation de leurs opérations — sans surcoût, sans complexité inutile. Un audit offert pour commencer.
+      </p>
+      <div class="hero-actions">
+        <a href="#formulaire" class="btn-primary">
+          Obtenir mon diagnostic gratuit
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
+        <a href="#benefices" class="btn-ghost">
+          <svg width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="10"/><path d="M12 8v4l3 3"/></svg>
+          Voir nos résultats
+        </a>
+      </div>
+      <div class="hero-trust">
+        <span class="hero-trust-item">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          +80 PME accompagnées
+        </span>
+        <span class="hero-divider" aria-hidden="true"></span>
+        <span class="hero-trust-item">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Résultats mesurables sous 3 mois
+        </span>
+        <span class="hero-divider" aria-hidden="true"></span>
+        <span class="hero-trust-item">
+          <svg width="14" height="14" fill="currentColor" viewBox="0 0 20 20" aria-hidden="true"><path d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+          Diagnostic 100 % offert
+        </span>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── BENEFITS ───────────────────────────────────────── -->
+  <section class="benefits" id="benefices" aria-labelledby="benefits-title">
+    <div class="container">
+      <div class="benefits-header reveal">
+        <span class="section-label">Ce que vous gagnez concrètement</span>
+        <h2 class="section-title" id="benefits-title">Des résultats chiffrés,<br>pas des promesses vagues</h2>
+        <p class="section-sub">Nos clients PME observent des gains concrets dès les premières semaines. Voici ce qu'ils nous rapportent le plus souvent.</p>
+      </div>
+      <div class="benefits-grid">
+        <article class="benefit-card reveal reveal-delay-1">
+          <div class="benefit-icon" aria-hidden="true">⏱</div>
+          <div class="benefit-stat">−5h/sem</div>
+          <h3 class="benefit-title">Gagnez 5 heures par semaine sur vos relances commerciales</h3>
+          <p class="benefit-desc">Grâce à l'automatisation de vos séquences de suivi, votre équipe commerciale se concentre sur la négociation — pas sur l'administratif. Les relances partent au bon moment, sans effort manuel.</p>
+        </article>
+        <article class="benefit-card reveal reveal-delay-2">
+          <div class="benefit-icon" aria-hidden="true">📊</div>
+          <div class="benefit-stat">×2,4</div>
+          <h3 class="benefit-title">Prenez vos décisions 2× plus vite grâce à des données lisibles en temps réel</h3>
+          <p class="benefit-desc">Vos indicateurs clés (chiffre d'affaires, taux de conversion, charge équipe) consolidés en un tableau de bord unique, accessible depuis n'importe quel appareil. Fini les fichiers Excel éparpillés.</p>
+        </article>
+        <article class="benefit-card reveal reveal-delay-3">
+          <div class="benefit-icon" aria-hidden="true">💰</div>
+          <div class="benefit-stat">−30%</div>
+          <h3 class="benefit-title">Réduisez vos coûts opérationnels de 30 % sans réduire vos effectifs</h3>
+          <p class="benefit-desc">En supprimant les tâches redondantes et en optimisant vos processus internes, vous libérez des ressources — humaines et financières — pour des activités à plus forte valeur ajoutée.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── TESTIMONIALS ───────────────────────────────────── -->
+  <section class="testimonials" id="preuves" aria-labelledby="testi-title">
+    <div class="container">
+      <div class="testimonials-header reveal">
+        <span class="section-label">Ils nous ont fait confiance</span>
+        <h2 class="section-title" id="testi-title">Ce que disent nos clients</h2>
+        <p class="section-sub">Des dirigeants de PME qui ont transformé leurs opérations avec NexForm Conseil.</p>
+      </div>
+      <div class="testimonials-grid">
+        <article class="testi-card reveal reveal-delay-1">
+          <div class="testi-stars" aria-label="5 étoiles">★★★★★</div>
+          <div class="testi-quote" aria-hidden="true">"</div>
+          <blockquote class="testi-text">
+            Avant NexForm, mes commerciaux passaient 30 % de leur temps à saisir des données dans notre CRM et à envoyer des emails de suivi manuellement. Aujourd'hui tout est automatisé. En trois mois, on a gagné l'équivalent d'un mi-temps — sans embaucher personne.
+          </blockquote>
+          <footer class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">SC</div>
+            <div>
+              <div class="testi-name">Sophie Chartier</div>
+              <div class="testi-role">Directrice générale · Chartier Solutions RH (42 salariés)</div>
+            </div>
+          </footer>
+        </article>
+        <article class="testi-card reveal reveal-delay-2">
+          <div class="testi-stars" aria-label="5 étoiles">★★★★★</div>
+          <div class="testi-quote" aria-hidden="true">"</div>
+          <blockquote class="testi-text">
+            Ce qui m'a convaincu, c'est la rapidité : en six semaines, on avait déjà un tableau de bord opérationnel et nos premiers workflows déployés. L'équipe NexForm comprend les contraintes d'une PME — pas de sur-dimensionnement, pas de projets pharaoniques. Du concret, du mesurable.
+          </blockquote>
+          <footer class="testi-author">
+            <div class="testi-avatar" aria-hidden="true">FM</div>
+            <div>
+              <div class="testi-name">Fabien Marchal</div>
+              <div class="testi-role">Président · Groupe Marchal Industrie (87 salariés)</div>
+            </div>
+          </footer>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FORM ───────────────────────────────────────────── -->
+  <section class="form-section" id="formulaire" aria-labelledby="form-title">
+    <div class="container">
+      <div class="form-layout">
+        <!-- Intro -->
+        <div class="form-intro reveal">
+          <span class="section-label">Passez à l'action</span>
+          <h2 class="section-title" id="form-title">Obtenez votre diagnostic digital offert</h2>
+          <p class="section-sub">En 30 minutes, nous identifions ensemble les 3 leviers d'efficacité les plus rapides à activer dans votre entreprise.</p>
+          <ul class="form-checklist" aria-label="Ce que comprend le diagnostic">
+            <li>Analyse de vos processus opérationnels actuels</li>
+            <li>Identification des gains de temps immédiats</li>
+            <li>Recommandations concrètes et chiffrées</li>
+            <li>Sans engagement, sans frais cachés</li>
+            <li>Réponse sous 24h ouvrées</li>
+          </ul>
+        </div>
+
+        <!-- Form card -->
+        <div class="form-card reveal reveal-delay-1">
+          <h3>Démarrez votre transformation</h3>
+          <p>Remplissez le formulaire — notre équipe vous contacte sous 24h.</p>
+
+          <form id="lead-form" novalidate>
+            <div class="form-row">
+              <div class="field">
+                <label for="prenom">Prénom <span aria-hidden="true">*</span></label>
+                <input type="text" id="prenom" name="prenom" placeholder="Jean" autocomplete="given-name" required />
+              </div>
+              <div class="field">
+                <label for="nom">Nom <span aria-hidden="true">*</span></label>
+                <input type="text" id="nom" name="nom" placeholder="Dupont" autocomplete="family-name" required />
+              </div>
+            </div>
+            <div class="field">
+              <label for="email">Email professionnel <span aria-hidden="true">*</span></label>
+              <input type="email" id="email" name="email" placeholder="j.dupont@monentreprise.fr" autocomplete="work email" required />
+            </div>
+            <div class="field">
+              <label for="entreprise">Nom de l'entreprise <span aria-hidden="true">*</span></label>
+              <input type="text" id="entreprise" name="entreprise" placeholder="Dupont & Associés" autocomplete="organization" required />
+            </div>
+            <div class="field">
+              <label for="besoin">Décrivez votre besoin principal en 2-3 phrases <span aria-hidden="true">*</span></label>
+              <textarea id="besoin" name="besoin" placeholder="Ex : Nous perdons beaucoup de temps à relancer nos clients manuellement et nos données sont éparpillées dans plusieurs outils..." required></textarea>
+            </div>
+            <button type="submit" class="btn-submit">
+              Obtenir mon diagnostic gratuit
+              <svg width="18" height="18" fill="none" stroke="currentColor" stroke-width="2.2" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </form>
+
+          <!-- Success message -->
+          <div id="success-msg" role="alert" aria-live="polite">
+            <div class="success-icon" aria-hidden="true">✓</div>
+            <h4>Merci, votre demande est enregistrée !</h4>
+            <p>Notre équipe vous contacte sous <strong>24h ouvrées</strong> pour organiser votre diagnostic gratuit. Pensez à vérifier votre dossier spam si vous ne recevez pas notre email.</p>
+          </div>
+
+          <p class="form-privacy">
+            🔒 Vos données sont confidentielles et ne sont jamais revendues.<br>
+            <a href="#mentions-legales">Mentions légales</a> · <a href="#mentions-legales">Politique de confidentialité</a>
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── FOOTER ─────────────────────────────────────────── -->
+  <footer class="footer" id="mentions-legales" role="contentinfo">
+    <div class="container">
+      <div class="footer-inner">
+        <div>
+          <div class="footer-logo">Nex<span>Form</span> Conseil</div>
+          <p class="footer-tagline">Transformation digitale des PME — Paris · Lyon · Bordeaux</p>
+        </div>
+        <nav class="footer-social" aria-label="Réseaux sociaux">
+          <a href="#" class="social-btn" aria-label="LinkedIn">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="Twitter / X">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
+          </a>
+          <a href="#" class="social-btn" aria-label="YouTube">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M22.54 6.42a2.78 2.78 0 00-1.95-1.96C18.88 4 12 4 12 4s-6.88 0-8.59.46a2.78 2.78 0 00-1.95 1.96A29 29 0 001 12a29 29 0 00.46 5.58A2.78 2.78 0 003.41 19.6C5.12 20 12 20 12 20s6.88 0 8.59-.46a2.78 2.78 0 001.95-1.95A29 29 0 0023 12a29 29 0 00-.46-5.58zM9.75 15.02V8.98L15.5 12l-5.75 3.02z"/></svg>
+          </a>
+        </nav>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2025 NexForm Conseil SAS — Tous droits réservés</span>
+        <nav class="footer-links" aria-label="Liens légaux">
+          <a href="#mentions-legales">Mentions légales</a>
+          <a href="#mentions-legales">Politique de confidentialité</a>
+          <a href="#mentions-legales">CGV</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    /* ── NAV scroll ── */
+    const nav = document.getElementById('nav');
+    window.addEventListener('scroll', () => {
+      nav.classList.toggle('scrolled', window.scrollY > 40);
+    }, { passive: true });
+
+    /* ── Reveal on scroll ── */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); observer.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+    /* ── Form submission ── */
+    const form = document.getElementById('lead-form');
+    const successMsg = document.getElementById('success-msg');
+
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+
+      // Basic validation
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => {
+        field.style.borderColor = '';
+        if (!field.value.trim()) {
+          field.style.borderColor = '#c0392b';
+          valid = false;
+        }
+      });
+
+      if (!valid) {
+        form.querySelector('[required]:not([value]),[required][style]')?.focus();
+        return;
+      }
+
+      // Collect data
+      const payload = {
+        prenom:     document.getElementById('prenom').value.trim(),
+        nom:        document.getElementById('nom').value.trim(),
+        email:      document.getElementById('email').value.trim(),
+        entreprise: document.getElementById('entreprise').value.trim(),
+        besoin:     document.getElementById('besoin').value.trim(),
+        timestamp:  new Date().toISOString(),
+        source:     'landing_nexform',
+      };
+
+      console.log('Lead capturé :', payload);
+      // → En production : fetch('/api/leads', { method:'POST', body: JSON.stringify(payload), headers:{'Content-Type':'application/json'} })
+
+      // Show success
+      form.style.display = 'none';
+      successMsg.classList.add('visible');
+      successMsg.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    });
+  </script>
+</body>
+</html>
